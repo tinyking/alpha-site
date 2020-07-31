@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/alpha-site',
+  base: '/',
   title: '语霖SIGMA',
   description: 'Just playing around',
   head: [
