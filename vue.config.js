@@ -1,6 +1,6 @@
 module.exports = {
   lintOnSave: false,
-  publicPath: process.env.NODE_ENV === 'production' ? '/sigma-man/' : '/',
+ // publicPath: process.env.NODE_ENV === 'production' ? '/sigma-man/' : '/',
   css: {
     loaderOptions: {
       less: {
