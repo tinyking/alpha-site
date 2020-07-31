@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Angular中的自定义异步验证器 | 语霖SIGMA</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    <link rel="icon" href="/logo.png">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="description" content="Just playing around">
+    <link rel="preload" href="/assets/css/0.styles.a54542af.css" as="style"><link rel="preload" href="/assets/js/app.e6d96ba3.js" as="script"><link rel="preload" href="/assets/js/2.0791ed77.js" as="script"><link rel="preload" href="/assets/js/7.cf350091.js" as="script"><link rel="prefetch" href="/assets/js/10.92df5b77.js"><link rel="prefetch" href="/assets/js/11.96870174.js"><link rel="prefetch" href="/assets/js/12.d9f7f2c0.js"><link rel="prefetch" href="/assets/js/13.2551456e.js"><link rel="prefetch" href="/assets/js/14.e192d8a7.js"><link rel="prefetch" href="/assets/js/15.71138a4e.js"><link rel="prefetch" href="/assets/js/16.510480be.js"><link rel="prefetch" href="/assets/js/17.84f10469.js"><link rel="prefetch" href="/assets/js/18.bdf696ae.js"><link rel="prefetch" href="/assets/js/19.6e756a02.js"><link rel="prefetch" href="/assets/js/20.c81e257a.js"><link rel="prefetch" href="/assets/js/21.77b1593c.js"><link rel="prefetch" href="/assets/js/22.483ab6ad.js"><link rel="prefetch" href="/assets/js/23.f48cd6c3.js"><link rel="prefetch" href="/assets/js/24.54f3764a.js"><link rel="prefetch" href="/assets/js/25.a62a19a3.js"><link rel="prefetch" href="/assets/js/26.74abb19d.js"><link rel="prefetch" href="/assets/js/27.83dec5ea.js"><link rel="prefetch" href="/assets/js/28.b6f9ccee.js"><link rel="prefetch" href="/assets/js/29.1d6f9f7c.js"><link rel="prefetch" href="/assets/js/3.98b924d5.js"><link rel="prefetch" href="/assets/js/30.7060825b.js"><link rel="prefetch" href="/assets/js/31.1b7abb99.js"><link rel="prefetch" href="/assets/js/32.3d4a8425.js"><link rel="prefetch" href="/assets/js/33.157c07f5.js"><link rel="prefetch" href="/assets/js/34.e5f937da.js"><link rel="prefetch" href="/assets/js/35.bd673677.js"><link rel="prefetch" href="/assets/js/36.f5ce9364.js"><link rel="prefetch" href="/assets/js/37.afde2df7.js"><link rel="prefetch" href="/assets/js/38.a3598165.js"><link rel="prefetch" href="/assets/js/39.fa84fcc2.js"><link rel="prefetch" href="/assets/js/4.bf7651fa.js"><link rel="prefetch" href="/assets/js/40.898bd902.js"><link rel="prefetch" href="/assets/js/41.6ad6288d.js"><link rel="prefetch" href="/assets/js/42.dc495217.js"><link rel="prefetch" href="/assets/js/43.c086458b.js"><link rel="prefetch" href="/assets/js/44.0fcf60b2.js"><link rel="prefetch" href="/assets/js/45.c3a034b3.js"><link rel="prefetch" href="/assets/js/46.98578bb7.js"><link rel="prefetch" href="/assets/js/47.7f2b46b9.js"><link rel="prefetch" href="/assets/js/48.df840d42.js"><link rel="prefetch" href="/assets/js/49.c589fa2e.js"><link rel="prefetch" href="/assets/js/5.3b2922b4.js"><link rel="prefetch" href="/assets/js/50.8c2ac094.js"><link rel="prefetch" href="/assets/js/51.8155af67.js"><link rel="prefetch" href="/assets/js/52.d3c055cf.js"><link rel="prefetch" href="/assets/js/53.ba265aac.js"><link rel="prefetch" href="/assets/js/54.d89da62c.js"><link rel="prefetch" href="/assets/js/55.10611c15.js"><link rel="prefetch" href="/assets/js/56.89f24512.js"><link rel="prefetch" href="/assets/js/57.3b9135a1.js"><link rel="prefetch" href="/assets/js/58.c1a593c1.js"><link rel="prefetch" href="/assets/js/59.7a60587e.js"><link rel="prefetch" href="/assets/js/6.3d131d85.js"><link rel="prefetch" href="/assets/js/60.952e8898.js"><link rel="prefetch" href="/assets/js/61.691fce4b.js"><link rel="prefetch" href="/assets/js/62.4a18d703.js"><link rel="prefetch" href="/assets/js/8.ae357278.js"><link rel="prefetch" href="/assets/js/9.152334c3.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.a54542af.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><div class="header"><div class="header-placeholder"></div> <div id="header" class="header page-wrapper" data-v-1103c5b4><div class="page ant-row" data-v-1103c5b4><div class="ant-col ant-col-sm-24 ant-col-md-6" data-v-1103c5b4><a href="/" class="logo" data-v-1103c5b4><svg t="1594620624756" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3628" width="30" height="30" class="icon" data-v-6cd74b85 data-v-1103c5b4><path d="M848 704h-96a48 48 0 0 0-48 46.88V960h128a64 64 0 0 0 64-64v-144a48 48 0 0 0-48-48z m-16-640h-128v209.12A48 48 0 0 0 752 320h96a48 48 0 0 0 48-48V128a64 64 0 0 0-64-64z" opacity=".4" p-id="3629" fill="#ffffff" data-v-6cd74b85></path> <path d="M704 272v-16H412.48l218.18 256-218.18 256H704v-17.12V960H232a104 104 0 0 1-84-165.28L393.3 512 148 229.2A104 104 0 0 1 232 64h472v208z" p-id="3630" fill="#ffffff" data-v-6cd74b85></path></svg> <span class="logo-text" data-v-1103c5b4>SIGMA</span></a></div> <div class="ant-col ant-col-sm-0 ant-col-md-18" data-v-1103c5b4><div class="menu" data-v-1103c5b4><ul role="menu" class="ant-menu ant-menu-horizontal ant-menu-root ant-menu-light" data-v-1103c5b4><li role="menuitem" class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu" style="display:none;"><div aria-haspopup="true" class="ant-menu-submenu-title"><span>···</span><i class="ant-menu-submenu-arrow"></i></div></li><li role="menuitem" class="ant-menu-item" data-v-1103c5b4><a href="/" class="router-link-active" data-v-1103c5b4>首页</a></li><li role="menuitem" class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu" style="display:none;"><div aria-haspopup="true" class="ant-menu-submenu-title"><span>···</span><i class="ant-menu-submenu-arrow"></i></div></li><li role="menuitem" class="ant-menu-item" data-v-1103c5b4><a href="/posts" class="router-link-active" data-v-1103c5b4>博客</a></li><li role="menuitem" class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu" style="display:none;"><div aria-haspopup="true" class="ant-menu-submenu-title"><span>···</span><i class="ant-menu-submenu-arrow"></i></div></li><li role="menuitem" class="ant-menu-item" data-v-1103c5b4><a href="/about" data-v-1103c5b4>关于我</a></li><li role="menuitem" class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu" style="visibility:hidden;position:absolute;"><div aria-haspopup="true" class="ant-menu-submenu-title"><span>···</span><i class="ant-menu-submenu-arrow"></i></div></li></ul> <a href="https://github.com/tinyking" target="_blank" class="gitbtn" data-v-1103c5b4>Github</a></div></div></div></div></div> <div class="main-container"><div class="main-content content__default"><p>在实际工作中，我们经常需要一个基于后端API验证值的验证器。为此，Angular提供了一种定义自定义异步验证器的简便方法。</p> <p>本文将介绍如何为Angular应用程序创建自定义异步验证器。</p> <p>通常你会调用一个真正的后端，但是在这里我们将创建一个虚拟的JSON文件，我们可以通过使用Http服务来调用它。如果正在使用Angular CLI，则可以将JSON文件放在/assets文件夹中，它将自动可用；</p> <p><code>/assets/users.json</code></p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span> <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Paul&quot;</span><span class="token punctuation">,</span> <span class="token property">&quot;email&quot;</span><span class="token operator">:</span> <span class="token string">&quot;paul@example.com&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ringo&quot;</span><span class="token punctuation">,</span> <span class="token property">&quot;email&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ringo@example.com&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;John&quot;</span><span class="token punctuation">,</span> <span class="token property">&quot;email&quot;</span><span class="token operator">:</span> <span class="token string">&quot;john@example.com&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;George&quot;</span><span class="token punctuation">,</span> <span class="token property">&quot;email&quot;</span><span class="token operator">:</span> <span class="token string">&quot;george@example.com&quot;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h1 id="注册服务"><a href="#注册服务" class="header-anchor">#</a> 注册服务</h1> <p>接下来，让我们创建一个具有<code>checkEmailNotTaken</code>方法的服务，该方法触发对我们的JSON文件的http GET调用。这里我们使用<code>RxJS</code>的延迟运算符来模拟一些延迟：</p> <p><code>signup.service.ts</code></p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Injectable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Http <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/http'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Observable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'rxjs/Observable'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'rxjs/add/operator/map'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'rxjs/add/operator/filter'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'rxjs/add/operator/delay'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Injectable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">SignupService</span> <span class="token punctuation">{</span>
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">private</span> http<span class="token operator">:</span> Http</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+  <span class="token function">checkEmailNotTaken</span><span class="token punctuation">(</span><span class="token parameter">email<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>http
+      <span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'assets/users.json'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=&gt;</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">users</span> <span class="token operator">=&gt;</span> users<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">user</span> <span class="token operator">=&gt;</span> user<span class="token punctuation">.</span>email <span class="token operator">===</span> email<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">users</span> <span class="token operator">=&gt;</span> <span class="token operator">!</span>users<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>请注意我们如何筛选与提供给方法的用户具有相同电子邮件的用户。然后我们再次映射结果并进行测试以确保我们得到一个空置对象。</p> <p>在真实场景中，您可能还想使用debounceTime和distinctUntilChanged运算符的组合，如我们在创建实时搜索的帖子中所讨论的。引入一些这样的去抖动将有助于将发送到后端API的请求数量保持在最低水平。</p> <h2 id="组件和异步验证器"><a href="#组件和异步验证器" class="header-anchor">#</a> 组件和异步验证器</h2> <p>我们的简单组件初始化我们的反应形式并定义我们的异步验证器：<em>validateEmailNotTaken</em>。请注意我们的<code>FormBuilder.group</code>声明中的表单控件如何将异步验证器作为第三个参数。这里我们只使用一个异步验证器，但是你想在数组中包含多个异步验证器：</p> <p>app.component.ts</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> OnInit <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  FormBuilder<span class="token punctuation">,</span>
+  FormGroup<span class="token punctuation">,</span>
+  Validators<span class="token punctuation">,</span>
+  AbstractControl
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/forms'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> SignupService <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./signup.service'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppComponent</span> <span class="token keyword">implements</span> <span class="token class-name">OnInit</span> <span class="token punctuation">{</span>
+  myForm<span class="token operator">:</span> FormGroup<span class="token punctuation">;</span>
+
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+    <span class="token parameter"><span class="token keyword">private</span> fb<span class="token operator">:</span> FormBuilder<span class="token punctuation">,</span>
+    <span class="token keyword">private</span> signupService<span class="token operator">:</span> SignupService</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+  <span class="token function">ngOnInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>myForm <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fb<span class="token punctuation">.</span><span class="token function">group</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      name<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">''</span><span class="token punctuation">,</span> Validators<span class="token punctuation">.</span>required<span class="token punctuation">]</span><span class="token punctuation">,</span>
+      email<span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">''</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span>Validators<span class="token punctuation">.</span>required<span class="token punctuation">,</span> Validators<span class="token punctuation">.</span>email<span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">validateEmailNotTaken</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">validateEmailNotTaken</span><span class="token punctuation">(</span><span class="token parameter">control<span class="token operator">:</span> AbstractControl</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>signupService<span class="token punctuation">.</span><span class="token function">checkEmailNotTaken</span><span class="token punctuation">(</span>control<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> res <span class="token operator">?</span> <span class="token keyword">null</span> <span class="token operator">:</span> <span class="token punctuation">{</span> emailTaken<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>我们的验证器与典型的自定义验证器非常相似。这里我们直接在组件类中定义了验证器而不是单独的文件。这样可以更轻松地访问我们注入的服务实例。另请注意我们如何绑定<strong>此</strong>值以确保它指向组件类。</p> <p>我们还可以在自己的文件中定义我们的异步验证器，以便更容易地重用和分离关注点。唯一棘手的部分是找到一种方法来提供我们的服务实例。在这里，例如，我们创建一个具有<em>createValidator</em>静态方法的类，该方法接收我们的服务实例并返回我们的验证器函数：</p> <p>/validators/async-email.validator.ts</p> <div class="language- extra-class"><pre class="language-text"><code>import { AbstractControl } from '@angular/forms';
+import { SignupService } from '../signup.service';
+
+export class ValidateEmailNotTaken {
+  static createValidator(signupService: SignupService) {
+    return (control: AbstractControl) =&gt; {
+      return signupService.checkEmailNotTaken(control.value).map(res =&gt; {
+        return res ? null : { emailTaken: true };
+      });
+    };
+  }
+}
+</code></pre></div><p>然后，回到我们的组件中，我们导入<em>ValidateEmailNotTaken</em>类，我们可以使用这样的验证器：</p> <div class="language- extra-class"><pre class="language-text"><code>ngOnInit() {
+  this.myForm = this.fb.group({
+    name: ['', Validators.required],
+    email: [
+      '',
+      [Validators.required, Validators.email],
+      ValidateEmailNotTaken.createValidator(this.signupService)
+    ]
+  });
+}
+</code></pre></div><h2 id="模板"><a href="#模板" class="header-anchor">#</a> 模板</h2> <p>在模板中，事情真的很简单：</p> <p>app.component.html</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;form [formGroup]=&quot;myForm&quot;&gt;
+  &lt;input type=&quot;text&quot; formControlName=&quot;name&quot;&gt;
+  &lt;input type=&quot;email&quot; formControlName=&quot;email&quot;&gt;
+
+  &lt;div *ngIf=&quot;myForm.get('email').status === 'PENDING'&quot;&gt;
+    Checking...
+  &lt;/div&gt;
+  &lt;div *ngIf=&quot;myForm.get('email').status === 'VALID'&quot;&gt;
+    😺 Email is available!
+  &lt;/div&gt;
+
+  &lt;div *ngIf=&quot;myForm.get('email').errors &amp;&amp; myForm.get('email').errors.emailTaken&quot;&gt;
+    😢 Oh noes, this email is already taken!
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre></div><p>您可以看到我们根据<em>电子邮件</em>表单控件上status属性的值显示不同的消息。对于可能的值<strong>状态</strong>是<em>VALID</em>，<em>INVALID</em>，<em>PENDING</em>和<em>禁用</em>。如果异步验证错误输出我们的<em>emailTaken</em>错误，我们也会显示错误消息。</p> <p>使用异步验证器验证的表单字段在验证<em>待处理</em>时也将具有<em>ng-pending</em>类。这样可以轻松设置当前待验证字段的样式。</p> <p>✨你有它！使用后端API检查有效性的简便方法。</p></div></div> <footer id="footer" data-v-6205c9ed><div class="footer-wrap" data-v-6205c9ed><div class="ant-row" data-v-6205c9ed><div class="ant-col" data-v-6205c9ed><div class="footer-center" data-v-6205c9ed><h2 data-v-6205c9ed><img src="https://gw.alipayobjects.com/zos/rmsportal/nBVXkrFdWHxbZlmMbsaH.svg" alt="AFX Cloud" class="title-icon" data-v-6205c9ed>
+            联系方式
+          </h2> <div data-v-6205c9ed><a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-landing/issues" data-v-6205c9ed><i aria-hidden="true" class="fa fa-weibo" data-v-6205c9ed></i>
+              微博
+              <span data-v-6205c9ed>-</span>
+              TinyKing
+            </a></div> <div data-v-6205c9ed><a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-landing/issues" data-v-6205c9ed><i aria-hidden="true" class="fa fa-github" data-v-6205c9ed></i>
+              Github
+              <span data-v-6205c9ed>-</span>
+              TinyKing
+            </a></div> <div data-v-6205c9ed><a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-landing/issues" data-v-6205c9ed><i aria-hidden="true" class="fa fa-weixin" data-v-6205c9ed></i>
+              微信
+              <span data-v-6205c9ed>-</span>
+              TinyKing
+            </a></div> <div data-v-6205c9ed><a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-landing/issues" data-v-6205c9ed><span style="top:2px;display:inline-block;position:relative;" data-v-6205c9ed><svg t="1594374590421" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1288" width="16" height="16" class="icon" data-v-6205c9ed><path d="M512 1024C229.236 1024 0 794.764 0 512S229.236 0 512 0s512 229.236 512 512-229.236 512-512 512zM382.138 267.52s-36.212 2.095-48.989 24.483c-12.8 22.365-54.318 137.379-54.318 137.379s13.847 6.377 37.282-10.66c23.436-17.035 30.883-46.847 30.883-46.847l42.59-2.118 1.07 121.39s-73.495-1.07-88.413 0c-14.895 1.048-23.412 40.449-23.412 40.449h111.825s-9.588 67.095-38.353 116.084c-28.742 48.99-83.06 87.32-83.06 87.32s39.423 15.964 77.73-6.4c38.354-22.343 66.63-120.693 66.63-120.693l89.926 110.057s8.192-52.387-1.466-67.189c-9.659-14.778-62.208-74.286-62.208-74.286l-22.947 20.247 16.337-65.117H531.2s0-38.354-19.153-40.495c-19.177-2.094-78.802 0-78.802 0V371.898h88.39s-1.07-39.4-18.106-39.4H359.773l22.342-64.955z m169.984 61.184v358.563h36.003l13.103 45.01 63.348-45.01h89.065V328.704H552.122z" fill="#ffffff" p-id="1289" data-v-6205c9ed></path> <path d="M594.781 368.64h117.9v277.876H670.79l-53.365 40.262-11.636-40.262h-11.008V368.64z" fill="#ffffff" p-id="1290" data-v-6205c9ed></path></svg></span>
+              知乎
+              <span data-v-6205c9ed>-</span>
+              TinyKing
+            </a></div></div></div></div></div> <div class="bottom-bar" data-v-6205c9ed>~语霖~</div></footer></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.e6d96ba3.js" defer></script><script src="/assets/js/2.0791ed77.js" defer></script><script src="/assets/js/7.cf350091.js" defer></script>
+  </body>
+</html>
